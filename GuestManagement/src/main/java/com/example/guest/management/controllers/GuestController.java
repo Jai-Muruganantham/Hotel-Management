@@ -102,5 +102,93 @@ public class GuestController {
             return "registrationResult"; // Return the name of the HTML file
         }
     }
+    @GetMapping("/checkoutGuest")
+    public String checkout(Model model) {
+        //model.addAttribute("guest", new Guest());
+        return "checkout";
+    }
+//    @PostMapping("/checkout")
+//    public String checkoutGuest(@RequestParam("guestId") Long guestId, Model model) {
+//        // Find the guest by ID
+//        Guest guest = guestService.findById(guestId);
+//
+//        if (guest != null && guest.getRoom() != null) {
+//            Room room = guest.getRoom();
+//
+//            // Clear the guest from the room
+//            room.setGuest(null);
+//            room.setStatus(RoomStatus.AVAILABLE);
+//
+//            // Save the updated room
+//            roomService.save(room);
+//
+//            // Remove the guest details from the model
+//            model.asMap().remove("guestName");
+//            model.asMap().remove("guestSurname");
+//            model.asMap().remove("roomNumber");
+//            model.asMap().remove("guestId");
+//
+//            model.addAttribute("message", "Checkout successful");
+//        } else {
+//            model.addAttribute("message", "Invalid guest ID or guest has already checked out");
+//        }
+//
+//        return "checkoutResult";
+//    }
+
+
+
+    @GetMapping("/checkout")
+    public String showCheckoutForm() {
+        return "checkout"; // Return the name of the HTML file (checkout.html)
+    }
+
+    @PostMapping("/getGuestDetails")
+    public String getGuestDetails(@RequestParam("guestId") Long guestId, Model model) {
+        // Find the guest by ID
+        Guest guest = guestService.findById(guestId);
+
+        if (guest != null && guest.getRoom() != null) {
+            model.addAttribute("guestId", guest.getId());
+            model.addAttribute("guestName", guest.getName());
+            model.addAttribute("guestSurname", guest.getSurname());
+            model.addAttribute("guestRoomNumber", guest.getRoom().getRoomNumber());
+        } else {
+            model.addAttribute("message", "Invalid guest ID");
+        }
+
+        return "checkout"; // Return the name of the HTML file (checkout.html)
+    }
+
+    // ...
+
+    @PostMapping("/checkout")
+    public String checkoutGuest(@RequestParam("guestId") Long guestId, Model model) {
+        // Find the guest by ID
+        Guest guest = guestService.findById(guestId);
+
+        if (guest != null && guest.getRoom() != null) {
+            Room room = guest.getRoom();
+
+            // Clear the guest from the room
+            room.setGuest(null);
+            room.setStatus(RoomStatus.AVAILABLE);
+
+            // Save the updated room
+            roomService.save(room);
+
+            // Remove the guest details from the model
+            model.asMap().remove("guestName");
+            model.asMap().remove("guestSurname");
+            model.asMap().remove("roomNumber");
+            model.asMap().remove("guestId");
+
+            model.addAttribute("message", "Checkout successful");
+        } else {
+            model.addAttribute("message", "Invalid guest ID or guest has already checked out");
+        }
+
+        return "checkoutResult"; // Return the name of the HTML file (checkoutResult.html)
+    }
 
 }
