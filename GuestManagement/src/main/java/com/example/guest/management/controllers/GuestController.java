@@ -28,8 +28,50 @@ public class GuestController {
         return "register";
     }
 
+//    @PostMapping("/registerGuest")
+//    public String saveGuest(@ModelAttribute("guest") Guest guest) {
+//        // Check if the room is available
+//        Room room = roomService.findAvailableRoom();
+//        if (room != null) {
+//            // Assign the guest to the available room
+//            guest.setRoom(room);
+//            room.setGuest(guest);
+//            room.setStatus(RoomStatus.OCCUPIED);
+//            guest.setRoom(room); // Set the room number in the guest entity
+//
+//            // Save the guest and update the room
+//            guestService.save(guest);
+//            roomService.save(room);
+//        } else {
+//            System.out.println("No available room");
+//        }
+//
+//        return "redirect:/guests/registerGuest";
+//    }
+//    @PostMapping("/registerGuest")
+//    public String saveGuest(@ModelAttribute("guest") Guest guest, Model model) {
+//        // Check if the room is available
+//        Room room = roomService.findAvailableRoom();
+//        if (room != null) {
+//            // Assign the guest to the available room
+//            guest.setRoom(room);
+//            room.setGuest(guest);
+//            room.setStatus(RoomStatus.OCCUPIED);
+//            guest.setRoom(room); // Set the room number in the guest entity
+//
+//            // Save the guest and update the room
+//            guestService.save(guest);
+//            roomService.save(room);
+//            model.addAttribute("message", "Room Reserved");
+//            return "registrationResult"; // Redirect to the registration page
+//        } else {
+//            model.addAttribute("message", "No available room"); // Add the attribute to the model
+//            return "registrationResult"; // Return the name of the HTML file
+//        }
+//    }
+
     @PostMapping("/registerGuest")
-    public String saveGuest(@ModelAttribute("guest") Guest guest) {
+    public String saveGuest(@ModelAttribute("guest") Guest guest, Model model) {
         // Check if the room is available
         Room room = roomService.findAvailableRoom();
         if (room != null) {
@@ -42,11 +84,23 @@ public class GuestController {
             // Save the guest and update the room
             guestService.save(guest);
             roomService.save(room);
-        } else {
-            System.out.println("No available room");
-        }
 
-        return "redirect:/guests/registerGuest";
+            // Add the guest details to the model
+            model.addAttribute("message", "Room Reserved");
+            model.addAttribute("guestName", guest.getName());
+            model.addAttribute("guestSurname", guest.getSurname());
+            model.addAttribute("roomNumber", room.getRoomNumber());
+            model.addAttribute("guestId", guest.getId());
+
+            return "registrationResult"; // Redirect to the registration page
+        } else {
+            model.asMap().remove("guestName");
+            model.asMap().remove("guestSurname");
+            model.asMap().remove("roomNumber");
+            model.asMap().remove("guestId");
+            model.addAttribute("message", "No available room"); // Add the attribute to the model
+            return "registrationResult"; // Return the name of the HTML file
+        }
     }
 
 }

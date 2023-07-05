@@ -11,7 +11,7 @@ import java.util.Optional;
 @Repository
 public interface RoomRepository extends JpaRepository<Room, Long> {
 
-    Optional<Room> findByStatus(RoomStatus status);
+    List<Room> findByStatus(RoomStatus status);
 
     // Add any additional custom query methods as needed
 }
