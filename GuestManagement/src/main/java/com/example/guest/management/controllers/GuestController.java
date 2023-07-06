@@ -12,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+
 @Controller
 @RequestMapping("/guests")
 public class GuestController {
@@ -80,11 +82,9 @@ public class GuestController {
         Room room = roomService.findAvailableRoom();
         if (room != null) {
             // Assign the guest to the available room
-            guest.setRoom(room);
-            room.setGuest(guest);
             room.setStatus(RoomStatus.OCCUPIED);
             guest.setRoom(room); // Set the room number in the guest entity
-
+            guest.setCheckinTime(LocalDateTime.now());
             // Save the guest and update the room
             guestService.save(guest);
             roomService.save(room);
@@ -181,7 +181,12 @@ public class GuestController {
             // Save the updated room
             roomService.save(room);
             History history = new History();
-            history.setGuest(guest);
+            history.setId(guest.getId());
+            history.setName(guest.getName());
+            history.setSurname(guest.getSurname());
+            history.setRoom(guest.getRoom());
+            history.setCheckinTime(guest.getCheckinTime());
+            history.setCheckoutTime(LocalDateTime.now());
             historyService.save(history);
             guestService.delete(guest);
             // Remove the guest details from the model

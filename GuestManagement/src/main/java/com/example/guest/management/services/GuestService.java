@@ -27,8 +27,6 @@ public class GuestService {
 
     public void delete(Guest guest) {
         // Delete associated history records first
-        List<History> historyRecords = historyRepository.findByGuestId(guest.getId());
-        historyRepository.deleteAll(historyRecords);
 
         // Delete the guest
         guestRepository.delete(guest);

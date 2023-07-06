@@ -7,12 +7,10 @@ import java.util.List;
 @Entity
 public class History {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long guestId;
 
-    @ManyToOne
-    @JoinColumn(name = "guest_id")
-    private Guest guest;
+    private String name;
+    private String surname;
 
     @ManyToOne
     @JoinColumn(name = "room_id")
@@ -27,19 +25,27 @@ public class History {
     // Constructors, getters, and setters
 
     public Long getId() {
-        return id;
+        return guestId;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.guestId = id;
     }
 
-    public Guest getGuest() {
-        return guest;
+    public String getName() {
+        return name;
     }
 
-    public void setGuest(Guest guest) {
-        this.guest = guest;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public Room getRoom() {

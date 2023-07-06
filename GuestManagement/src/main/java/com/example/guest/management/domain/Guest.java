@@ -2,6 +2,8 @@ package com.example.guest.management.domain;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
+
 
 @Entity
 public class Guest {
@@ -11,6 +13,8 @@ public class Guest {
 
     private String name;
     private String surname;
+    @Column(name = "checkin_time")
+    private LocalDateTime checkinTime;
 
     @OneToOne
     @JoinColumn(name = "room_number")
@@ -50,12 +54,24 @@ public class Guest {
         this.surname = surname;
     }
 
+
+
+    public LocalDateTime getCheckinTime() {
+        return checkinTime;
+    }
+
+    public void setCheckinTime(LocalDateTime checkinTime) {
+        this.checkinTime = checkinTime;
+    }
+
+
     @Override
     public String toString() {
         return "Guest{" +
-                "id=" + guest_id +
+                "guest_id=" + guest_id +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
+                ", checkinTime=" + checkinTime +
                 ", room=" + room +
                 '}';
     }
