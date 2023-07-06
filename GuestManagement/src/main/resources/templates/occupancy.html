@@ -22,7 +22,7 @@
         <td th:text="${guest.id}"></td>
         <td th:text="${guest.name}"></td>
         <td th:text="${guest.surname}"></td>
-        <td th:text="${guest.checkinTime}"></td>
+        <td th:text="${#temporals.format(guest.checkinTime, 'yyyy-MM-dd HH:mm')}"></td>
         <td th:text="${guest.room.roomNumber}"></td>
     </tr>
     </tbody>
