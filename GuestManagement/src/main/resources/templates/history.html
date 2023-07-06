@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Hotel Management System - History</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+<h1>History of Guests</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th>Guest ID</th>
+        <th>Room Number</th>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Check-in Time</th>
+        <th>Check-out Time</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="history : ${histories}">
+        <td th:text="${history.id}"></td>
+        <td th:text="${history.room.roomNumber}"></td>
+        <td th:text="${history.name}"></td>
+        <td th:text="${history.surname}"></td>
+        <td th:text="${#temporals.format(history.checkinTime, 'yyyy-MM-dd HH:mm')}"></td>
+        <td th:text="${#temporals.format(history.checkoutTime, 'yyyy-MM-dd HH:mm')}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

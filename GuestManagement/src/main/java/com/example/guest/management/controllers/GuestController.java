@@ -5,6 +5,7 @@ import com.example.guest.management.domain.History;
 import com.example.guest.management.domain.Room;
 import com.example.guest.management.domain.RoomStatus;
 import com.example.guest.management.repositories.GuestRepository;
+import com.example.guest.management.repositories.HistoryRepository;
 import com.example.guest.management.services.GuestService;
 import com.example.guest.management.services.HistoryService;
 import com.example.guest.management.services.RoomService;
@@ -24,12 +25,14 @@ public class GuestController {
     private final RoomService roomService;
     private final HistoryService historyService;
     private final GuestRepository guestRepository;
+    private final HistoryRepository historyRepository;
     @Autowired
-    public GuestController(GuestService guestService, RoomService roomService, HistoryService historyService, GuestRepository guestRepository) {
+    public GuestController(GuestService guestService, RoomService roomService, HistoryService historyService, GuestRepository guestRepository, HistoryRepository historyRepository) {
         this.guestService = guestService;
         this.roomService = roomService;
         this.historyService = historyService;
         this.guestRepository = guestRepository;
+        this.historyRepository = historyRepository;
     }
 
     @GetMapping("/registerGuest")
@@ -37,49 +40,6 @@ public class GuestController {
         model.addAttribute("guest", new Guest());
         return "register";
     }
-
-//    @PostMapping("/registerGuest")
-//    public String saveGuest(@ModelAttribute("guest") Guest guest) {
-//        // Check if the room is available
-//        Room room = roomService.findAvailableRoom();
-//        if (room != null) {
-//            // Assign the guest to the available room
-//            guest.setRoom(room);
-//            room.setGuest(guest);
-//            room.setStatus(RoomStatus.OCCUPIED);
-//            guest.setRoom(room); // Set the room number in the guest entity
-//
-//            // Save the guest and update the room
-//            guestService.save(guest);
-//            roomService.save(room);
-//        } else {
-//            System.out.println("No available room");
-//        }
-//
-//        return "redirect:/guests/registerGuest";
-//    }
-//    @PostMapping("/registerGuest")
-//    public String saveGuest(@ModelAttribute("guest") Guest guest, Model model) {
-//        // Check if the room is available
-//        Room room = roomService.findAvailableRoom();
-//        if (room != null) {
-//            // Assign the guest to the available room
-//            guest.setRoom(room);
-//            room.setGuest(guest);
-//            room.setStatus(RoomStatus.OCCUPIED);
-//            guest.setRoom(room); // Set the room number in the guest entity
-//
-//            // Save the guest and update the room
-//            guestService.save(guest);
-//            roomService.save(room);
-//            model.addAttribute("message", "Room Reserved");
-//            return "registrationResult"; // Redirect to the registration page
-//        } else {
-//            model.addAttribute("message", "No available room"); // Add the attribute to the model
-//            return "registrationResult"; // Return the name of the HTML file
-//        }
-//    }
-
     @PostMapping("/registerGuest")
     public String saveGuest(@ModelAttribute("guest") Guest guest, Model model) {
         // Check if the room is available
@@ -213,5 +173,13 @@ public class GuestController {
         model.addAttribute("guests", guests); // Pass the guests list to the Thymeleaf template
 
         return "occupancy"; // Return the name of the Thymeleaf template for rendering
+    }
+    @GetMapping("/roomHistory")
+    public String viewHistory(Model model) {
+        List<History> history = historyRepository.findAll(); // Fetch all guests from the repository
+
+        model.addAttribute("histories", history); // Pass the guests list to the Thymeleaf template
+
+        return "history"; // Return the name of the Thymeleaf template for rendering
     }
 }
