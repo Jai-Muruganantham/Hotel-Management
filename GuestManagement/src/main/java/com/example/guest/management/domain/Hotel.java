@@ -7,25 +7,20 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 @Entity
 public class Hotel {
     @Id
-    private int hotelId;
+    private Long hotelId;
     private int totalRooms;
     private int availableRooms;
     private int occupiedRooms;
 
-    public Hotel() {
-        this.hotelId = 1; // Default hotel ID
-        this.totalRooms = 5; // Default number of rooms
-        this.availableRooms = 5; // Default number of available rooms
-        this.occupiedRooms = 0; // Default number of occupied rooms
-    }
+
 
     // Getters and Setters
 
-    public int getHotelId() {
+    public Long getHotelId() {
         return hotelId;
     }
 
-    public void setHotelId(int hotelId) {
+    public void setHotelId(Long hotelId) {
         this.hotelId = hotelId;
     }
 
