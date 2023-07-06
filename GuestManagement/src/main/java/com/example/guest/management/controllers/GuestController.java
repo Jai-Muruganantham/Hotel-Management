@@ -1,9 +1,11 @@
 package com.example.guest.management.controllers;
 
 import com.example.guest.management.domain.Guest;
+import com.example.guest.management.domain.History;
 import com.example.guest.management.domain.Room;
 import com.example.guest.management.domain.RoomStatus;
 import com.example.guest.management.services.GuestService;
+import com.example.guest.management.services.HistoryService;
 import com.example.guest.management.services.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,10 +18,12 @@ public class GuestController {
 
     private final GuestService guestService;
     private final RoomService roomService;
+    private final HistoryService historyService;
     @Autowired
-    public GuestController(GuestService guestService, RoomService roomService) {
+    public GuestController(GuestService guestService, RoomService roomService, HistoryService historyService) {
         this.guestService = guestService;
         this.roomService = roomService;
+        this.historyService = historyService;
     }
 
     @GetMapping("/registerGuest")
@@ -171,12 +175,15 @@ public class GuestController {
             Room room = guest.getRoom();
 
             // Clear the guest from the room
-            room.setGuest(null);
+            //room.setGuest(null);
             room.setStatus(RoomStatus.AVAILABLE);
 
             // Save the updated room
             roomService.save(room);
-
+            History history = new History();
+            history.setGuest(guest);
+            historyService.save(history);
+            guestService.delete(guest);
             // Remove the guest details from the model
             model.asMap().remove("guestName");
             model.asMap().remove("guestSurname");
