@@ -1,5 +1,6 @@
 package com.example.guest.management.services;
 
+import com.example.guest.management.domain.Hotel;
 import com.example.guest.management.domain.Room;
 import com.example.guest.management.domain.RoomStatus;
 import com.example.guest.management.repositories.HotelRepository;
@@ -15,6 +16,7 @@ public class RoomService {
 
     @Autowired
     private RoomRepository roomRepository;
+    @Autowired
     private HotelRepository hotelRepository;
     public Room findAvailableRoom() {
         List<Room> availableRooms = roomRepository.findByStatus(RoomStatus.AVAILABLE);
@@ -25,15 +27,19 @@ public class RoomService {
     }
     @PostConstruct
     public void createDefaultRooms() {
-
+        Hotel hotel = hotelRepository.findById(1L).orElse(null);
+        if(hotel!=null)
+        {
         if (roomRepository.count() == 0) {
-            for (int i = 1; i <= 5; i++) {
+            int totalRooms = hotel.getTotalRooms();
+            for (int i = 1; i <= totalRooms; i++) {
                 Room room = new Room();
                 room.setRoomNumber(i);
                 room.setStatus(RoomStatus.AVAILABLE);
 
                 roomRepository.save(room);
             }
+        }
         }
     }
     public void save(Room room) {

@@ -23,7 +23,7 @@ public class GuestManagementApplication {
 	// Invoke the creation of default rooms
 	@PostConstruct
 	public void init() {
-		roomService.createDefaultRooms();
 		hotelService.createDefaultHotel();
+		roomService.createDefaultRooms();
 	}
 }
