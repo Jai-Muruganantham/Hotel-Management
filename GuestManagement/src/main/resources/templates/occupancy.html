@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Hotel Management System - Room Occupancy</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+<h1>Room Occupancy</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th>Guest ID</th>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Check-in Time</th>
+        <th>Room Number</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="guest : ${guests}">
+        <td th:text="${guest.id}"></td>
+        <td th:text="${guest.name}"></td>
+        <td th:text="${guest.surname}"></td>
+        <td th:text="${guest.checkinTime}"></td>
+        <td th:text="${guest.room.roomNumber}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

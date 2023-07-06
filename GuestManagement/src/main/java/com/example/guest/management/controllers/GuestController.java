@@ -4,6 +4,7 @@ import com.example.guest.management.domain.Guest;
 import com.example.guest.management.domain.History;
 import com.example.guest.management.domain.Room;
 import com.example.guest.management.domain.RoomStatus;
+import com.example.guest.management.repositories.GuestRepository;
 import com.example.guest.management.services.GuestService;
 import com.example.guest.management.services.HistoryService;
 import com.example.guest.management.services.RoomService;
@@ -13,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Controller
 @RequestMapping("/guests")
@@ -21,11 +23,13 @@ public class GuestController {
     private final GuestService guestService;
     private final RoomService roomService;
     private final HistoryService historyService;
+    private final GuestRepository guestRepository;
     @Autowired
-    public GuestController(GuestService guestService, RoomService roomService, HistoryService historyService) {
+    public GuestController(GuestService guestService, RoomService roomService, HistoryService historyService, GuestRepository guestRepository) {
         this.guestService = guestService;
         this.roomService = roomService;
         this.historyService = historyService;
+        this.guestRepository = guestRepository;
     }
 
     @GetMapping("/registerGuest")
@@ -202,5 +206,12 @@ public class GuestController {
 
         return "checkoutResult"; // Return the name of the HTML file (checkoutResult.html)
     }
+    @GetMapping("/roomOccupancy")
+    public String viewOccupancy(Model model) {
+        List<Guest> guests = guestRepository.findAll(); // Fetch all guests from the repository
 
+        model.addAttribute("guests", guests); // Pass the guests list to the Thymeleaf template
+
+        return "occupancy"; // Return the name of the Thymeleaf template for rendering
+    }
 }
