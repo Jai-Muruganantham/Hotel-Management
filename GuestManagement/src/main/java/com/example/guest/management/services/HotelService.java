@@ -18,9 +18,6 @@ public class HotelService {
     }
 
     public void save(Hotel hotel) {
-
-        // Set other properties of the hotel if needed
-
         hotelRepository.save(hotel);
     }
     @PostConstruct

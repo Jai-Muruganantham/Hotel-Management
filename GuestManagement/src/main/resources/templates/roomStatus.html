@@ -6,11 +6,26 @@
 </head>
 <body>
 <h1>Room Status</h1>
-
 <table>
     <thead>
     <tr>
-        <th>Room Number:</th>
+        <th>Total Rooms</th>
+        <th>Available Rooms</th>
+        <th>Occupied Rooms</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="detail : ${details}">
+        <td th:text="${detail.totalRooms}"></td>
+        <td th:text="${detail.availableRooms}"></td>
+        <td th:text="${detail.occupiedRooms}"></td>
+    </tr>
+    </tbody>
+</table>
+<table>
+    <thead>
+    <tr>
+        <th>Room Number</th>
         <th>Status</th>
     </tr>
     </thead>
@@ -21,5 +36,6 @@
     </tr>
     </tbody>
 </table>
+
 </body>
 </html>

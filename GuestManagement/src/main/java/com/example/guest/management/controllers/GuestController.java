@@ -1,11 +1,9 @@
 package com.example.guest.management.controllers;
 
-import com.example.guest.management.domain.Guest;
-import com.example.guest.management.domain.History;
-import com.example.guest.management.domain.Room;
-import com.example.guest.management.domain.RoomStatus;
+import com.example.guest.management.domain.*;
 import com.example.guest.management.repositories.GuestRepository;
 import com.example.guest.management.repositories.HistoryRepository;
+import com.example.guest.management.repositories.HotelRepository;
 import com.example.guest.management.services.GuestService;
 import com.example.guest.management.services.HistoryService;
 import com.example.guest.management.services.RoomService;
@@ -26,13 +24,15 @@ public class GuestController {
     private final HistoryService historyService;
     private final GuestRepository guestRepository;
     private final HistoryRepository historyRepository;
+    private final HotelRepository hotelRepository;
     @Autowired
-    public GuestController(GuestService guestService, RoomService roomService, HistoryService historyService, GuestRepository guestRepository, HistoryRepository historyRepository) {
+    public GuestController(GuestService guestService, RoomService roomService, HistoryService historyService, GuestRepository guestRepository, HistoryRepository historyRepository, HotelRepository hotelRepository) {
         this.guestService = guestService;
         this.roomService = roomService;
         this.historyService = historyService;
         this.guestRepository = guestRepository;
         this.historyRepository = historyRepository;
+        this.hotelRepository = hotelRepository;
     }
 
     @GetMapping("/registerGuest")
@@ -52,6 +52,12 @@ public class GuestController {
             // Save the guest and update the room
             guestService.save(guest);
             roomService.save(room);
+            // Update hotel room counts
+            Hotel hotel = hotelRepository.findById(1L)
+                    .orElseThrow(() -> new RuntimeException("Hotel not found"));
+            hotel.setAvailableRooms(hotel.getAvailableRooms() - 1);
+            hotel.setOccupiedRooms(hotel.getOccupiedRooms() + 1);
+            hotelRepository.save(hotel);
 
             // Add the guest details to the model
             model.addAttribute("message", "Room Reserved");
@@ -153,6 +159,11 @@ public class GuestController {
             history.setCheckoutTime(LocalDateTime.now());
             historyService.save(history);
             guestService.delete(guest);
+            Hotel hotel = hotelRepository.findById(1L)
+                    .orElseThrow(() -> new RuntimeException("Hotel not found"));
+            hotel.setAvailableRooms(hotel.getAvailableRooms() + 1);
+            hotel.setOccupiedRooms(hotel.getOccupiedRooms() - 1);
+            hotelRepository.save(hotel);
             // Remove the guest details from the model
             model.asMap().remove("guestName");
             model.asMap().remove("guestSurname");
