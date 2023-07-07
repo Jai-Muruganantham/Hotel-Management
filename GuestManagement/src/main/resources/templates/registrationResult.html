@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
     <title>Registration Result</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
 </head>
 <body>
 <h2>Registration Result</h2>
@@ -11,6 +11,6 @@
 <p th:if="${guestName}">Guest Name: <span th:text="${guestName}"></span></p>
 <p th:if="${guestSurname}">Guest Surname: <span th:text="${guestSurname}"></span></p>
 <p th:if="${roomNumber}">Room Number: <span th:text="${roomNumber}"></span></p>
-<button onclick="location.href='/hotel'" type="button">Go Back</button>
+<button onclick="location.href='/hotel'" type="button">Go Back to Home</button>
 </body>
 </html>

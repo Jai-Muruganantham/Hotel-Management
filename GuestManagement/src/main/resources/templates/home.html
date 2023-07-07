@@ -3,6 +3,9 @@
 <head>
     <title>Hotel Management System</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
+    <style>
+
+    </style>
     <script th:inline="javascript">
         function navigate(url) {
             window.location.href = url;
@@ -15,6 +18,7 @@
 <button class="button" th:onclick="|javascript:navigate('/guests/checkout')|">Checkout Guest</button>
 <button class="button" th:onclick="|javascript:navigate('/guests/roomOccupancy')|">View Occupancy</button>
 <button class="button" th:onclick="|javascript:navigate('/guests/roomHistory')|">View History</button>
-<button class="button" th:onclick="|javascript:navigate('/room/roomStatus')|">Show room status</button>
+<button class="button" th:onclick="|javascript:navigate('/room/roomStatus')|">Show Room Status</button>
 </body>
 </html>
+

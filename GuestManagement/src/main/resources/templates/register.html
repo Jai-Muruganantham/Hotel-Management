@@ -1,20 +1,26 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
     <title>Register Guest</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
+
 </head>
 <body>
 <h1>Register Guest</h1>
 <form th:action="@{/guests/registerGuest}" th:object="${guest}" method="post">
-    <label for="name">Name:</label>
+    <label for="name">Name</label>
     <input type="text" id="name" th:field="*{name}" required>
     <br>
 
-    <label for="surname">Surname:</label>
+    <label for="surname">Surname</label>
     <input type="text" id="surname" th:field="*{surname}" required>
     <br>
-    <input type="submit" value="Register Guest">
+    <div class="button-container">
+        <input type="submit" value="Register Guest">
+    </div>
+    <div class="button-container">
+        <button onclick="location.href='/hotel'" type="button">Go Back to Home</button>
+    </div>
 </form>
 </body>
 </html>

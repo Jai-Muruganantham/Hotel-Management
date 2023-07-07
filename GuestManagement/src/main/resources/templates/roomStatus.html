@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Hotel Management System - Room Status</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
 </head>
 <body>
 <h1>Room Status</h1>
@@ -36,6 +36,6 @@
     </tr>
     </tbody>
 </table>
-
+<button onclick="location.href='/hotel'" type="button">Go Back to Home</button>
 </body>
 </html>

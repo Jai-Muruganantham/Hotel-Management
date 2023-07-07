@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
     <title>Checkout Result</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
 </head>
 <body>
 <h2>Checkout Result</h2>
 <h3 th:text="${message}"></h3>
-<button onclick="location.href='/hotel'" type="button">Go Back</button>
+<button onclick="location.href='/hotel'" type="button">Go Back to Home</button>
 </body>
 </html>
