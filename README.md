@@ -1,6 +1,8 @@
 # Hotel-Guest-Management
 Welcome to my application! Click the image below to watch the YouTube video.
+
 [![Video Thumbnail](https://img.youtube.com/vi/ExdMYFfACvY/0.jpg)](https://www.youtube.com/watch?v=ExdMYFfACvY)
+
 ## Task Description
 
 The hotel has 5 single rooms. The rooms are numbered from 1 to 5.
@@ -22,6 +24,10 @@ Possible actions:
 **Server:** Java 17, Maven, Spring boot 3.1.2, Junit, Mockito
 
 **Database:** MySQL 8
+
+Click the image below to watch the YouTube video about backend.
+
+[![Video Thumbnail](https://img.youtube.com/vi/ux1q9Cajy1c/0.jpg)](https://www.youtube.com/watch?v=ux1q9Cajy1c)
 
 ## Run the Application
 
