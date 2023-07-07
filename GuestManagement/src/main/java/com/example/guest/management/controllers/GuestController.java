@@ -128,7 +128,7 @@ public class GuestController {
             model.addAttribute("guestSurname", guest.getSurname());
             model.addAttribute("guestRoomNumber", guest.getRoom().getRoomNumber());
         } else {
-            model.addAttribute("message", "Invalid guest ID");
+            model.addAttribute("message", "Invalid guest ID or guest has already checked out");
         }
 
         return "checkout"; // Return the name of the HTML file (checkout.html)

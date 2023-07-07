@@ -7,7 +7,7 @@
 <body>
 <h2>Guest Checkout</h2>
 <form method="post" th:action="@{/guests/getGuestDetails}">
-    <label for="guestId">Guest ID:</label>
+    <label for="guestId">Enter Guest ID to Checkout</label>
     <input type="text" id="guestId" name="guestId" required><br><br>
 
     <input type="submit" value="Get Guest Details">
@@ -19,8 +19,6 @@
     <p><strong>Name:</strong> <span th:text="${guestName}"></span></p>
     <p><strong>Surname:</strong> <span th:text="${guestSurname}"></span></p>
     <p><strong>Room Number:</strong> <span th:text="${guestRoomNumber}"></span></p>
-
-    <h3>Checkout</h3>
     <form method="post" th:action="@{/guests/checkout}">
         <input type="hidden" id="guestIdCheckout" name="guestId" th:value="${guestId}" required>
         <input type="submit" value="Checkout">
