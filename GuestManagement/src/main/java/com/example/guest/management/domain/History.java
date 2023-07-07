@@ -8,22 +8,17 @@ import java.util.List;
 public class History {
     @Id
     private Long guestId;
-
     private String name;
     private String surname;
-
     @ManyToOne
     @JoinColumn(name = "room_id")
     private Room room;
-
     @Column(name = "checkin_time")
     private LocalDateTime checkinTime;
-
     @Column(name = "checkout_time")
     private LocalDateTime checkoutTime;
 
-    // Constructors, getters, and setters
-
+    // getters, and setters
     public Long getId() {
         return guestId;
     }

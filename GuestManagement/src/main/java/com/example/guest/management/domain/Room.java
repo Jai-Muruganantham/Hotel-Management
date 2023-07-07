@@ -10,13 +10,10 @@ public class Room {
     private int roomNumber;
     @OneToOne(mappedBy = "room")
     private Guest guest;
-
     @Enumerated(EnumType.STRING)
     private RoomStatus status;
 
-    // Constructors, getters, and setters
-
-
+    // getters, and setters
     public int getRoomNumber() {
         return roomNumber;
     }

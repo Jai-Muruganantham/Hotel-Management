@@ -8,6 +8,5 @@ import java.util.List;
 
 @Repository
 public interface HistoryRepository extends JpaRepository<History, Long> {
-    // Custom query to retrieve history records by guest
     List<History> findByGuestId(Long guestId);
 }

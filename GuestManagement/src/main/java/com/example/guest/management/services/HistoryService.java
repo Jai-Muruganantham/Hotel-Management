@@ -16,7 +16,6 @@ public class HistoryService {
         this.historyRepository = historyRepository;
     }
 
-
     public void save(History history) {
         historyRepository.save(history);
     }

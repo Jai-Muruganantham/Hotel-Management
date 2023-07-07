@@ -17,9 +17,11 @@ public class GuestManagementApplication {
 		this.roomService = roomService;
 		this.hotelService = hotelService;
 	}
+
 	public static void main(String[] args) {
 		SpringApplication.run(GuestManagementApplication.class, args);
 	}
+
 	// Invoke the creation of default rooms
 	@PostConstruct
 	public void init() {

@@ -10,7 +10,6 @@ public class Guest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long guest_id;
-
     private String name;
     private String surname;
     @Column(name = "checkin_time")
@@ -27,9 +26,7 @@ public class Guest {
         this.room = room;
     }
 
-    // Constructors, getters, and setters
-
-
+    // getters, and setters
     public Long getId() {
         return guest_id;
     }
@@ -54,8 +51,6 @@ public class Guest {
         this.surname = surname;
     }
 
-
-
     public LocalDateTime getCheckinTime() {
         return checkinTime;
     }
@@ -63,7 +58,6 @@ public class Guest {
     public void setCheckinTime(LocalDateTime checkinTime) {
         this.checkinTime = checkinTime;
     }
-
 
     @Override
     public String toString() {

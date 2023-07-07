@@ -19,15 +19,11 @@ public class GuestService {
     @Autowired
     private HistoryRepository historyRepository;
 
-
     public List<Guest> findAll() {
         return guestRepository.findAll();
     }
 
-
     public void delete(Guest guest) {
-        // Delete associated history records first
-
         // Delete the guest
         guestRepository.delete(guest);
     }
@@ -39,6 +35,7 @@ public class GuestService {
     public void deleteById(Long id) {
         guestRepository.deleteById(id);
     }
+
     public void save(Guest guest) {
         guestRepository.save(guest);
     }

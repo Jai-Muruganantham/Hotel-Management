@@ -34,7 +34,6 @@ public class GuestController {
         this.historyRepository = historyRepository;
         this.hotelRepository = hotelRepository;
     }
-
     @GetMapping("/registerGuest")
     public String showAddNannyForm(Model model) {
         model.addAttribute("guest", new Guest());
@@ -58,14 +57,12 @@ public class GuestController {
             hotel.setAvailableRooms(hotel.getAvailableRooms() - 1);
             hotel.setOccupiedRooms(hotel.getOccupiedRooms() + 1);
             hotelRepository.save(hotel);
-
-            // Add the guest details to the model
+            //Add the guest details to the model
             model.addAttribute("message", "Room Reserved");
             model.addAttribute("guestName", guest.getName());
             model.addAttribute("guestSurname", guest.getSurname());
             model.addAttribute("roomNumber", room.getRoomNumber());
             model.addAttribute("guestId", guest.getId());
-
             return "registrationResult"; // Redirect to the registration page
         } else {
             model.asMap().remove("guestName");
@@ -81,42 +78,10 @@ public class GuestController {
         //model.addAttribute("guest", new Guest());
         return "checkout";
     }
-//    @PostMapping("/checkout")
-//    public String checkoutGuest(@RequestParam("guestId") Long guestId, Model model) {
-//        // Find the guest by ID
-//        Guest guest = guestService.findById(guestId);
-//
-//        if (guest != null && guest.getRoom() != null) {
-//            Room room = guest.getRoom();
-//
-//            // Clear the guest from the room
-//            room.setGuest(null);
-//            room.setStatus(RoomStatus.AVAILABLE);
-//
-//            // Save the updated room
-//            roomService.save(room);
-//
-//            // Remove the guest details from the model
-//            model.asMap().remove("guestName");
-//            model.asMap().remove("guestSurname");
-//            model.asMap().remove("roomNumber");
-//            model.asMap().remove("guestId");
-//
-//            model.addAttribute("message", "Checkout successful");
-//        } else {
-//            model.addAttribute("message", "Invalid guest ID or guest has already checked out");
-//        }
-//
-//        return "checkoutResult";
-//    }
-
-
-
     @GetMapping("/checkout")
     public String showCheckoutForm() {
         return "checkout"; // Return the name of the HTML file (checkout.html)
     }
-
     @PostMapping("/getGuestDetails")
     public String getGuestDetails(@RequestParam("guestId") Long guestId, Model model) {
         // Find the guest by ID
@@ -130,12 +95,8 @@ public class GuestController {
         } else {
             model.addAttribute("message", "Invalid guest ID or guest has already checked out");
         }
-
         return "checkout"; // Return the name of the HTML file (checkout.html)
     }
-
-    // ...
-
     @PostMapping("/checkout")
     public String checkoutGuest(@RequestParam("guestId") Long guestId, Model model) {
         // Find the guest by ID
@@ -143,11 +104,7 @@ public class GuestController {
 
         if (guest != null && guest.getRoom() != null) {
             Room room = guest.getRoom();
-
-            // Clear the guest from the room
-            //room.setGuest(null);
             room.setStatus(RoomStatus.AVAILABLE);
-
             // Save the updated room
             roomService.save(room);
             History history = new History();
@@ -169,7 +126,6 @@ public class GuestController {
             model.asMap().remove("guestSurname");
             model.asMap().remove("roomNumber");
             model.asMap().remove("guestId");
-
             model.addAttribute("message", "Checkout successful");
         } else {
             model.addAttribute("message", "Invalid guest ID or guest has already checked out");
@@ -180,17 +136,13 @@ public class GuestController {
     @GetMapping("/roomOccupancy")
     public String viewOccupancy(Model model) {
         List<Guest> guests = guestRepository.findAll(); // Fetch all guests from the repository
-
         model.addAttribute("guests", guests); // Pass the guests list to the Thymeleaf template
-
         return "occupancy"; // Return the name of the Thymeleaf template for rendering
     }
     @GetMapping("/roomHistory")
     public String viewHistory(Model model) {
         List<History> history = historyRepository.findAll(); // Fetch all guests from the repository
-
         model.addAttribute("histories", history); // Pass the guests list to the Thymeleaf template
-
         return "history"; // Return the name of the Thymeleaf template for rendering
     }
 }

@@ -18,6 +18,7 @@ public class RoomService {
     private RoomRepository roomRepository;
     @Autowired
     private HotelRepository hotelRepository;
+
     public Room findAvailableRoom() {
         List<Room> availableRooms = roomRepository.findByStatus(RoomStatus.AVAILABLE);
         if (!availableRooms.isEmpty()) {
@@ -25,6 +26,7 @@ public class RoomService {
         }
         return null; // No available room found
     }
+
     @PostConstruct
     public void createDefaultRooms() {
         Hotel hotel = hotelRepository.findById(1L).orElse(null);
@@ -42,6 +44,7 @@ public class RoomService {
         }
         }
     }
+
     public void save(Room room) {
         roomRepository.save(room);
     }

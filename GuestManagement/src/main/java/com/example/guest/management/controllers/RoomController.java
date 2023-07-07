@@ -19,7 +19,6 @@ public class RoomController {
         this.roomRepository = roomRepository;
         this.hotelRepository = hotelRepository;
     }
-
     @GetMapping("/roomStatus")
     public String showAddNannyForm(Model model) {
 

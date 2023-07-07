@@ -12,8 +12,6 @@ public class Hotel {
     private int availableRooms;
     private int occupiedRooms;
 
-
-
     // Getters and Setters
 
     public Long getHotelId() {
