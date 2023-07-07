@@ -16,7 +16,7 @@ Possible actions:
 4. History and status of the room - show the names and surnames of all guests who have stayed in order. Showroom status - available or occupied.
 
 ## Tech Stack & Required Environment
-**Client:** HTML, CSS, JavaScript
+**Client:** HTML, CSS
 
 **Server:** Java 17, Maven, Spring boot 3.1.2, Junit, Mockito
 
