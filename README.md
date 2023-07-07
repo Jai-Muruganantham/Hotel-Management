@@ -1,4 +1,5 @@
 # Hotel-Guest-Management
+Welcome to my application! Click the image below to watch the YouTube video.
 [![Video Thumbnail](https://img.youtube.com/vi/ExdMYFfACvY/0.jpg)](https://www.youtube.com/watch?v=ExdMYFfACvY)
 ## Task Description
 
